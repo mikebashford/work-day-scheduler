@@ -14,6 +14,12 @@
 var avaialableTimeSlots = ['9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm'];
 var currentDate = document.querySelector('#currentDay');
 var timeBlocks = document.querySelector('.container');
+var startTime = 9;
+
+var getCurrentTime = () =>
+{
+  return moment().format('HH');
+}
 
 var showCurrentDate = () =>
 {
@@ -28,25 +34,47 @@ var createTimeBlocks = () =>
   for(i = 0; i < avaialableTimeSlots.length; i++)
   {
     var blockDivider = document.createElement('div');
-    var timeSection = document.createElement('span');
+    var timeSection = document.createElement('div');
     var textSection = document.createElement('textarea');
     var saveButton = document.createElement('button');
     $(blockDivider).addClass('row');
-    $(timeSection).addClass('hour');
-    $(textSection).addClass('past present future');
-    $(saveButton).addClass('saveBtn');
+    $(timeSection).addClass('hour col-sm-1');
+    timeSection.setAttribute('id', parseInt([i]) + parseInt(startTime));
+    $(textSection).addClass('description present col-sm-10');
+    $(saveButton).addClass('saveBtn col-sm-1');
     timeSection.innerHTML = avaialableTimeSlots[i];
     textSection.innerHTML = "";
     saveButton.innerHTML = "Save";
     blockDivider.append(timeSection, textSection, saveButton);
     timeBlocks.append(blockDivider);
   }
+  return timeBlocks;
 }
 
-var getCurrentTime = () =>
+var compareTimes = (timeSlot) =>
 {
-  return moment().format('LT');
+  var getTimeSlotText = document.querySelector('.description');
+  var getTimeSlot = document.querySelector('.hour');
+  var currentTime = getCurrentTime();
+  // for(i = 0; i < avaialableTimeSlots.length; i++)
+  // {
+  //   if(parseInt(timeSlot) > parseInt(currentTime))
+  //   {
+  //     $(getTimeSlotText).addClass('future');
+  //   }
+  //   else
+  //   {
+  //     $(getTimeSlotText).addClass('past');
+  //   }
+  // }
+}
+
+var setTimeBlockValue = () =>
+{
+
 }
 
 showCurrentDate();
 createTimeBlocks();
+compareTimes();
+
