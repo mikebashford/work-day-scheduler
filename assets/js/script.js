@@ -73,20 +73,23 @@ var compareTimes = () =>
   });
 }
 
-// var loadSavedItems = () =>
-// {
-//   $('.time-block').each(function()
-//   {
-//     var currentHour = localStorage.getItem(time)
-//     var savedText = localStorage.getItem(text);
-//     console.log(currentHour);
-//     console.log(savedText);
-//   })
-// }
+var loadSavedItems = () =>
+{
+  $('.hour').each(function()
+  {
+    var getCurrentHour = $(this).text();
+    var getTextValue = localStorage.getItem(getCurrentHour);
+    console.log(getTextValue);
+    if( getCurrentHour != null )
+    {
+      $(this).siblings('.description').val(getTextValue);
+    }
+  })
+}
 
 showCurrentDate();
 createTimeBlocks();
 compareTimes();
-//loadSavedItems();
+loadSavedItems();
 
 
