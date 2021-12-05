@@ -37,11 +37,11 @@ var createTimeBlocks = () =>
     var timeSection = document.createElement('div');
     var textSection = document.createElement('textarea');
     var saveButton = document.createElement('button');
-    $(blockDivider).addClass('row');
+    $(blockDivider).addClass('row time-block');
+    blockDivider.setAttribute('id', parseInt([i]) + parseInt(startTime));
     $(timeSection).addClass('hour col-sm-1');
-    timeSection.setAttribute('id', parseInt([i]) + parseInt(startTime));
-    $(textSection).addClass('description present col-sm-10');
-    $(saveButton).addClass('saveBtn col-sm-1');
+    $(textSection).addClass('description col-sm-10');
+    $(saveButton).addClass('btn saveBtn col-sm-1');
     timeSection.innerHTML = avaialableTimeSlots[i];
     textSection.innerHTML = "";
     saveButton.innerHTML = "Save";
@@ -51,28 +51,42 @@ var createTimeBlocks = () =>
   return timeBlocks;
 }
 
-var compareTimes = (timeSlot) =>
+var compareTimes = () =>
 {
-  var getTimeSlotText = document.querySelector('.description');
-  var getTimeSlot = document.querySelector('.hour');
-  var currentTime = getCurrentTime();
-  // for(i = 0; i < avaialableTimeSlots.length; i++)
-  // {
-  //   if(parseInt(timeSlot) > parseInt(currentTime))
-  //   {
-  //     $(getTimeSlotText).addClass('future');
-  //   }
-  //   else
-  //   {
-  //     $(getTimeSlotText).addClass('past');
-  //   }
-  // }
+  var currentTime = parseInt(getCurrentTime());
+
+  $('.time-block').each(function()
+  {
+    var getBlockHour = parseInt($(this).attr('id'));
+
+    if( getBlockHour > currentTime )
+    {
+  
+      $(this).addClass('future');
+      return;
+    }
+    else if( getBlockHour === currentTime )
+    {
+      $(this).addClass('present');
+      return;
+    }
+    else
+    {
+      $(this).addClass('past');
+      return;
+    }
+  })
 }
 
-var setTimeBlockValue = () =>
-{
+var saveButton = document.querySelector('.saveBtn');
 
-}
+$(saveButton).on('click', function()
+{
+  var inputText = $(this).value();
+  var currentTime = $(this).attr('id');
+
+  localStorage.setItem(inputText, currentTime);
+})
 
 showCurrentDate();
 createTimeBlocks();
