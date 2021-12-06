@@ -29,7 +29,6 @@ var createTimeBlocks = () =>
     $(timeSection).addClass('hour col-sm-1');
     $(textSection).addClass('description col-sm-10');
     $(saveButton).addClass('btn saveBtn col-sm-1');
-    //saveButton.setAttribute('id', (parseInt([i]) + parseInt(startTime)));
     timeSection.innerHTML = avaialableTimeSlots[i];
     textSection.innerHTML = "";
     saveButton.innerHTML = "Save";
