@@ -7,7 +7,7 @@ A website that allows you to plan your schedule from 9am to 5pm
 * CSS
 * JavaScript
 * Bootstrap
-* Jquery
+* jQuery
 * Moment.js
 
 ## Website
